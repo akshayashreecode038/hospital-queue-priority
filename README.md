@@ -1,83 +1,183 @@
-# Hospital Emergency Patient Queue Management System
+# 🏥 Hospital Emergency Patient Queue Management System
 
-A web-based emergency-room queue built on core data structures.
-Backend: Python (standard library only). Front end: HTML, CSS and JavaScript.
+A web-based Hospital Emergency Patient Queue Management System designed to manage patients efficiently based on the severity of their medical conditions.
 
-## How to run
+The system uses **Data Structures and Algorithms (DSA)** to prioritize patients, manage waiting queues, maintain patient records, and track hospital activity.
 
-1. Install Python 3.8 or newer (no other installs needed).
-2. Clone the repository and open its folder:
+Unlike a traditional first-come-first-served queue, this system ensures that patients with more critical conditions receive attention first, while maintaining FIFO order for patients with the same priority.
 
-       git clone https://github.com/<your-username>/hospital-emergency-queue.git
-       cd hospital-emergency-queue
+## ✨ Features
 
-3. Start the server:
+- **Patient Registration:** Register patients with their name, age, medical condition, and priority level.
+- **Priority-Based Queue:** Automatically arranges patients based on the severity of their condition.
+- **Automatic Patient Allocation:** Identifies the next patient who should be attended.
+- **Priority Management:** Update a patient's priority while they are waiting.
+- **Patient Cancellation:** Remove patients from the waiting queue.
+- **Patient Search:** Search patient records using patient ID or name.
+- **Waiting History:** Maintain records of completed and removed patients.
+- **Waiting Time Tracking:** Calculate patient waiting times and average waiting time.
+- **Heap Visualization:** Display the underlying min-heap as a tree and array.
+- **Recent Activity:** Track recent hospital queue activities.
+- **Interactive Dashboard:** View patient statistics and queue information through a web interface.
 
-       python server.py
+## 🚦 Priority Levels
 
-4. The browser opens at http://localhost:8000. Stop the server with Ctrl+C.
+Patients are assigned one of five priority levels:
 
-A console-only version is also included: `python hospital_queue.py`
-
-## Project structure
-
-    hospital-emergency-queue/
-    |-- hospital_queue.py   Data structures + system logic (+ console version)
-    |-- server.py           JSON API and static file server
-    |-- LICENSE             MIT license
-    `-- static/
-        `-- index.html      Front end (dashboard)
-
-## DSA concepts and where they are used
-
-| Concept | Where |
-|---|---|
-| Min-heap priority queue | `PriorityQueue` class: waiting patients ordered by (priority, arrival order) |
-| Hash map | `records` (ID -> patient), `name_index` (name -> IDs), heap position map for O(log n) removal |
-| Singly linked list | `LinkedList` class: history of seen/removed patients |
-| Queue (FIFO) | `Queue` class: recent-activity log |
-| Sorting | `merge_sort`: waiting list display and history sorted by longest wait |
-
-## Complexity
-
-| Operation | Time |
-|---|---|
-| Register patient (heap insert) | O(log n) |
-| Call next patient (extract min) | O(log n) |
-| See next patient (peek) | O(1) |
-| Remove / change priority of any patient | O(log n) |
-| Search by ID | O(1) average |
-| Display sorted queue (merge sort) | O(n log n) |
-| Add to history (tail pointer) | O(1) |
-
-## Features
-
-- Register patients with a priority from 1 (Critical) to 5 (Non-urgent)
-- Queue arranges itself automatically; ties are served first-come-first-served
-- "Next patient" panel with a live waiting timer and a Call patient button
-- Remove a patient or change their priority at any time
-- Search records by ID or (partial) name
-- Waiting history with average wait, sortable by longest wait
-- Heap structure view (tree and array) to show how the heap works
-- Recent activity log
-
-## API (used by the front end)
-
-| Method | Path | Purpose |
+| Priority | Category | Description |
 |---|---|---|
-| GET | /api/state | Queue, next patient, heap, history, stats, activity |
-| POST | /api/register | Register a patient |
-| POST | /api/attend | Call the next patient |
-| POST | /api/cancel | Remove a patient from the queue |
-| POST | /api/priority | Change a waiting patient's priority |
-| GET | /api/search?q= | Search by ID or name |
-| POST | /api/sample | Load sample patients |
-| POST | /api/reset | Clear all data |
+| 1 | Critical | Requires immediate attention |
+| 2 | Emergent | Needs very urgent medical attention |
+| 3 | Urgent | Serious but stable condition |
+| 4 | Less Urgent | Can wait for a short period |
+| 5 | Non-Urgent | Minor conditions |
 
-## Possible viva questions
+**Note:** A lower priority number represents a higher medical urgency. Patients with the same priority are attended in their order of arrival.
 
-- Why a heap and not a sorted list? Insert is O(log n) instead of O(n).
-- How are equal priorities handled? The heap key is (priority, arrival sequence).
-- Why is the queue merge-sorted for display? A heap only guarantees the root is smallest.
-- How does removal from the middle work? The position map finds the index in O(1), then sift-up/sift-down restores the heap.
-- Limitation: data is kept in memory, so it resets when the server stops.
+## 🧠 Data Structures and Algorithms Used
+
+This project demonstrates the practical implementation of multiple DSA concepts.
+
+| DSA Concept | Application |
+|---|---|
+| Min-Heap | Manages the priority-based patient waiting queue. |
+| Hash Maps | Stores patient records and enables efficient searching using patient IDs and names. |
+| Singly Linked List | Maintains the history of completed and removed patients. |
+| FIFO Queue | Stores the six most recent hospital activities. |
+| Merge Sort | Sorts patients for queue display and waiting history reports. |
+
+### Time Complexity
+
+| Operation | Time Complexity |
+|---|---|
+| Register Patient | O(log n) |
+| Attend Next Patient | O(log n) |
+| View Next Patient | O(1) |
+| Remove Patient | O(log n) |
+| Change Patient Priority | O(log n) |
+| Search by Patient ID | O(1) average |
+| Display Sorted Queue | O(n log n) |
+| Add Patient to History | O(1) |
+
+## 🛠️ Technologies Used
+
+- **Python** – Backend logic and DSA implementation.
+- **HTML5** – Frontend structure.
+- **CSS3** – Styling and responsive dashboard.
+- **JavaScript** – Interactive frontend and API communication.
+- **Python HTTP Server** – Backend server and REST API.
+
+The project uses Python's standard library for the backend and does not require additional Python package installations.
+
+## 📂 Project Structure
+
+```text
+Hospital-Emergency-Queue/
+│
+├── hospital_queue.py    # DSA implementation and console version
+│
+├── server.py            # Backend server and REST API
+│
+├── static/
+│   └── index.html       # Frontend dashboard
+│
+├── README.md            # Project documentation
+│
+├── LICENSE              # MIT License
+│
+└── .gitignore
+```
+
+## ⚙️ Installation and Setup
+
+### Prerequisites
+
+- Python 3.8 or above
+- Git
+- A modern web browser
+
+### Step 1: Clone the Repository
+
+```bash
+git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY.git
+```
+
+### Step 2: Navigate to the Project Folder
+
+```bash
+cd YOUR-REPOSITORY
+```
+
+### Step 3: Run the Application
+
+```bash
+python server.py
+```
+
+### Step 4: Open the Application
+
+The application automatically opens in your default browser.
+
+Alternatively, visit:
+
+```text
+http://localhost:8000
+```
+
+To stop the server, press `Ctrl + C` in the terminal.
+
+### Running the Console Version
+
+A console-based version is also available:
+
+```bash
+python hospital_queue.py
+```
+
+## 🔌 API Endpoints
+
+The backend provides the following API endpoints:
+
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | `/api/state` | Retrieves queue information, statistics, history, and activity. |
+| POST | `/api/register` | Registers a new patient. |
+| POST | `/api/attend` | Attends the next patient in the queue. |
+| POST | `/api/cancel` | Removes a patient from the waiting queue. |
+| POST | `/api/priority` | Updates a patient's priority. |
+| GET | `/api/search?q=` | Searches patient records. |
+| POST | `/api/sample` | Loads sample patient records. |
+| POST | `/api/reset` | Resets the queue system. |
+
+## 🎯 Learning Outcomes
+
+Through this project, the following concepts are demonstrated:
+
+- Practical implementation of non-linear data structures.
+- Understanding priority queues and min-heap operations.
+- Efficient searching using hash maps.
+- Managing historical records using linked lists.
+- Understanding FIFO queue operations.
+- Applying sorting algorithms to real-world problems.
+- Connecting backend logic with a web-based frontend.
+- Designing and implementing API-based communication.
+
+## 🚀 Future Improvements
+
+- Database integration for permanent patient record storage.
+- User authentication for hospital staff.
+- Separate dashboards for doctors and administrators.
+- Patient notifications when their turn approaches.
+- Advanced analytics and hospital performance reports.
+
+## ⚠️ Disclaimer
+
+This project is developed for educational and academic purposes to demonstrate Data Structures and Algorithms. It is not intended for actual medical diagnosis, emergency triage, or real-world hospital operations.
+
+## 👩‍💻 Author
+
+Developed as a Data Structures and Algorithms project to demonstrate the practical application of fundamental data structures and algorithms in a real-world inspired hospital management scenario.
+
+---
+
+⭐ If you find this project interesting, consider giving this repository a star!
