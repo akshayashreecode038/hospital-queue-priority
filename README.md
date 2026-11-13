@@ -98,10 +98,6 @@ Hospital-Emergency-Queue/
 
 ### Step 1: Clone the Repository
 
-```bash
-git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY.git
-```
-
 ### Step 2: Navigate to the Project Folder
 
 ```bash
